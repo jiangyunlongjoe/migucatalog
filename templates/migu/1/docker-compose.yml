@@ -16,7 +16,7 @@ nginxlb:
   stdin_open: true
 sjb:
   tty: true
-  image: 10.211.95.81:5002/migu/sjb_tomcat-6.0.32_jre6_msm:v1.9
+  image: 10.211.95.81:5002/migu/sjb_tomcat-6.0.32_jre6_msm:v1.7
   volumes:
   - /mnt/nfs/:/mnt/data
   stdin_open: true
