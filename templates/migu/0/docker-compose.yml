@@ -1,0 +1,39 @@
+nginxlb:
+  ports:
+  - 80:80/tcp
+  environment:
+    RANCHER_GEN_PROJECT_ID: 1a5
+    RANCHER_GEN_SECRET_KEY: RZTDR6arnYKDNqk8MXoaP3Cq8BrnZs49n4hcWRcw
+    RANCHER_GEN_ACCESS_KEY: 2BF82BCD332B21A9EB9C
+    RANCHER_GEN_HOST: 10.211.95.77
+    RANCHER_GEN_PORT: '8080'
+    RANCHER_GEN_OPTIONS: --stack migu --service sjb
+    NGINX_RUN_TYPE: rancher-gen
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=host2
+  tty: true
+  image: 10.211.95.81:5002/migu/nginx-appsoar-gen:v0.2
+  stdin_open: true
+sjb:
+  tty: true
+  image: 10.211.95.81:5002/migu/sjb_tomcat-6.0.32_jre6_msm:v1.9
+  volumes:
+  - /mnt/nfs/:/mnt/data
+  stdin_open: true
+newsserver:
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=host2
+    io.rancher.container.dns: 'true'
+  tty: true
+  image: 10.211.95.81:5002/migu/newsserver_tomcat-6.0.32_jre6_msm:v0.8
+  stdin_open: true
+  net: host
+migu-memcached:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: hostname=host3
+    io.rancher.container.dns: 'true'
+  tty: true
+  image: 10.211.95.81:5002/migu/memcached:1.4.25
+  stdin_open: true
+  net: host

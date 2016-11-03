@@ -1,0 +1,21 @@
+.catalog:
+  name: migu
+  version: 1.0.0
+  description: "MiGu sjb and newserver service"
+nginxlb:
+  scale: 1
+sjb:
+  scale: 6
+  health_check:
+    port: 8080
+    interval: 6000
+    initializing_timeout: 150000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 10000
+    request_line: GET "/sjb/index.jsp" "HTTP/1.0"
+    healthy_threshold: 2
+newsserver:
+  scale: 1
+migu-memcached:
+  scale: 1
