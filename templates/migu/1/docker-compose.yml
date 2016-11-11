@@ -1,6 +1,6 @@
 nginxlb:
   ports:
-  - 80:80/tcp
+  - 80:8080/tcp
   environment:
     RANCHER_GEN_PROJECT_ID: 1a5
     RANCHER_GEN_SECRET_KEY: RZTDR6arnYKDNqk8MXoaP3Cq8BrnZs49n4hcWRcw
